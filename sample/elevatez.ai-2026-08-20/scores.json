@@ -1,0 +1,111 @@
+{
+  "search": {
+    "score": 68,
+    "unmeasured": [],
+    "signals": {
+      "crawl": {
+        "score": 100,
+        "measured": true,
+        "evidence": "crawl basics healthy"
+      },
+      "cwv": {
+        "score": 98,
+        "measured": true,
+        "evidence": "Lighthouse performance 98/100 (mobile, lab)"
+      },
+      "schema": {
+        "score": 40,
+        "measured": true,
+        "evidence": "no JSON-LD on homepage"
+      },
+      "content": {
+        "score": 100,
+        "measured": true,
+        "evidence": "titles/metas/headings present"
+      },
+      "authority": {
+        "score": 16,
+        "measured": true,
+        "evidence": "7 referring domains; 12 backlinks; spam score 42"
+      },
+      "keywords": {
+        "score": 0,
+        "measured": true,
+        "evidence": "0 ranked keywords (diagnostic baseline, not a grade)"
+      }
+    }
+  },
+  "answers": {
+    "score": 35,
+    "unmeasured": [
+      "aiDemand"
+    ],
+    "signals": {
+      "citations": {
+        "score": 20,
+        "measured": true,
+        "evidence": "branded mention rate 100% (9 probes), unbranded 0% (0 probes), 0 cells unmeasured"
+      },
+      "extractability": {
+        "score": 55,
+        "measured": true,
+        "evidence": "substantial extractable text"
+      },
+      "eeat": {
+        "score": 40,
+        "measured": true,
+        "evidence": "limited E-E-A-T signals detected from homepage (deep pages unscanned in v1)"
+      },
+      "aiDemand": {
+        "measured": false
+      }
+    }
+  },
+  "agents": {
+    "score": 54,
+    "unmeasured": [],
+    "signals": {
+      "access": {
+        "score": 100,
+        "measured": true,
+        "evidence": "all 9 AI crawlers allowed"
+      },
+      "llmsTxt": {
+        "score": 0,
+        "measured": true,
+        "evidence": "no llms.txt (agents-pillar gap; NOT a search-ranking issue)"
+      },
+      "schemaHonesty": {
+        "score": 50,
+        "measured": true,
+        "evidence": "no schema to judge (neutral)"
+      },
+      "rawHtml": {
+        "score": 95,
+        "measured": true,
+        "evidence": "5571 chars of content readable without JavaScript"
+      },
+      "discovery": {
+        "score": 0,
+        "measured": true,
+        "evidence": "no discovery headers or alternate link"
+      }
+    }
+  },
+  "overall": 51,
+  "mentionRates": {
+    "branded": {
+      "mentioned": 9,
+      "measured": 9,
+      "rate": 1
+    },
+    "unbranded": {
+      "mentioned": 0,
+      "measured": 0,
+      "rate": 0
+    },
+    "measuredCells": 9,
+    "unmeasuredCells": 0
+  },
+  "rubric": "rubric.md v1"
+}

@@ -88,7 +88,9 @@ export function renderReport(site, dfs, scores, findings, top) {
   lines.push(`| SEARCH | ANSWERS | AGENTS | OVERALL |`, `|---|---|---|---|`, `| ${fmt(s.search?.score)} | ${fmt(s.answers?.score)} | ${fmt(s.agents?.score)} | ${fmt(s.overall)} |`, "");
   if (rates && rates.measuredCells > 0) {
     lines.push(`## What AI says about you today`, "");
-    lines.push(`Branded mention rate: **${(rates.branded.rate * 100).toFixed(0)}%** (${rates.branded.measured} measured probes). Unbranded: **${(rates.unbranded.rate * 100).toFixed(0)}%** (${rates.unbranded.measured} measured).${rates.unmeasuredCells ? ` ${rates.unmeasuredCells} probe cells were unmeasured (provider failures) and are excluded — an unmeasured probe is never counted as "not mentioned".` : ""}`, "");
+    const cohortLine = (label, c) =>
+      c.measured ? `${label}: **${(c.rate * 100).toFixed(0)}%** (${c.measured} measured probes)` : `${label}: **unmeasured** (no probes ran for this cohort — not a 0%)`;
+    lines.push(`${cohortLine("Branded mention rate", rates.branded)}. ${cohortLine("Unbranded", rates.unbranded)}.${rates.unmeasuredCells ? ` ${rates.unmeasuredCells} probe cells were unmeasured (provider failures) and are excluded — an unmeasured probe is never counted as "not mentioned".` : ""}`, "");
     if (rates.branded.rate > 0.5 && rates.unbranded.rate === 0) lines.push(`This is the classic pattern: AI knows the brand exists but never *recommends* it. The roadmap below targets exactly that gap.`, "");
     for (const p of (dfs?.llmProbes || []).slice(0, 6)) {
       const cells = p.results.map((r) => `${r.model}: ${r.status !== "ok" ? "unmeasured" : r.mentioned ? "✅ mentioned" : "— not mentioned"}`).join(" · ");

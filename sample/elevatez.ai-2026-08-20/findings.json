@@ -1,0 +1,56 @@
+{
+  "target": "https://elevatez.ai",
+  "generatedAt": "2026-08-20T20:55:50.840Z",
+  "findings": [
+    {
+      "url": "https://elevatez.ai",
+      "severity": "warn",
+      "category": "agents",
+      "message": "No llms.txt (agents-pillar gap — NOT a search-ranking issue; Google ignores this file, agents read it)",
+      "fix": "Ship the generated llms.txt draft from fix-pack.md",
+      "effort": "low",
+      "impact": "med",
+      "evidence": "absent"
+    },
+    {
+      "url": "https://elevatez.ai",
+      "severity": "warn",
+      "category": "agents",
+      "message": "No llms.txt discovery headers or alternate link",
+      "fix": "Add Link: rel=\"llms-txt\" header or <link rel=\"alternate\"> tag",
+      "effort": "low",
+      "impact": "low",
+      "evidence": "none observed"
+    },
+    {
+      "url": "https://elevatez.ai",
+      "severity": "warn",
+      "category": "schema",
+      "message": "No Organization schema",
+      "fix": "Add the organization.json snippet from fix-pack",
+      "effort": "low",
+      "impact": "med",
+      "evidence": "types: none"
+    },
+    {
+      "url": "https://elevatez.ai",
+      "severity": "warn",
+      "category": "extractability",
+      "message": "No FAQ or comparison-table extraction primitives found on the homepage",
+      "fix": "Add a key-takeaways block, FAQ section, or comparison table (40-60 word direct answers)",
+      "effort": "med",
+      "impact": "high",
+      "evidence": "none detected"
+    },
+    {
+      "url": "https://elevatez.ai",
+      "severity": "warn",
+      "category": "authority",
+      "message": "Backlink spam score 42",
+      "fix": "Review and disavow toxic links",
+      "effort": "med",
+      "impact": "med",
+      "evidence": "7 referring domains"
+    }
+  ]
+}

@@ -62,7 +62,7 @@ Every weight in the three scores is published in [`rubric.md`](rubric.md) with a
 
 ## Sample output
 
-_A full sample report from a real audit will land here after the first public run._
+A real audit of [elevatez.ai](https://elevatez.ai), run 2026-08-20 with this exact skill: [`sample/elevatez.ai-2026-08-20/`](sample/elevatez.ai-2026-08-20/) — report.md, findings.json, and fix-pack.md. Scores came back **SEARCH 68 / ANSWERS 35 / AGENTS 54**, the branded-vs-unbranded mention split surfaced the classic "AI knows the brand but never recommends it" pattern, and the measured DataForSEO spend was **$0.63** (small site; thin keyword footprint keeps SERP checks cheap).
 
 ## Honesty rules
 
