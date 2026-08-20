@@ -1,0 +1,19 @@
+# {SITE_NAME}
+
+> {ONE_LINE_SUMMARY — what this site offers and for whom}
+
+{CONTEXT_PARAGRAPH — 2-3 sentences an AI assistant needs: what you sell/do, who it is for, what makes you credible. Facts, not slogans.}
+
+## Key pages
+
+- [{PAGE_TITLE}]({ABSOLUTE_URL}): {one-line description}
+- [{PAGE_TITLE}]({ABSOLUTE_URL}): {one-line description}
+- [{PAGE_TITLE}]({ABSOLUTE_URL}): {one-line description}
+
+## Contact
+
+- [Contact]({ABSOLUTE_URL}): {how to reach the business}
+
+## Optional
+
+- [llms-full.txt]({ORIGIN}/llms-full.txt): full-content version for deep ingestion

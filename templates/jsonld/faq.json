@@ -1,0 +1,17 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "_HONESTY": "Ship ONLY if these exact FAQs are visible on the page and the page is indexable. Delete this _HONESTY key before shipping.",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "{VISIBLE_QUESTION_1}",
+      "acceptedAnswer": { "@type": "Answer", "text": "{VISIBLE_ANSWER_1 — 40-60 words, direct}" }
+    },
+    {
+      "@type": "Question",
+      "name": "{VISIBLE_QUESTION_2}",
+      "acceptedAnswer": { "@type": "Answer", "text": "{VISIBLE_ANSWER_2}" }
+    }
+  ]
+}

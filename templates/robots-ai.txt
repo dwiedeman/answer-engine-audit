@@ -1,0 +1,48 @@
+# AI-crawler block for robots.txt — default-open for answer-engine visibility,
+# transactional paths excluded per bot. Append below your existing rules.
+# GPTBot is TRAINING (business choice); OAI-SearchBot is ChatGPT SEARCH inclusion.
+
+User-agent: GPTBot
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Disallow: /admin
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Disallow: /admin
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Disallow: /admin
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Disallow: /admin
+
+Sitemap: {ORIGIN}/sitemap.xml
