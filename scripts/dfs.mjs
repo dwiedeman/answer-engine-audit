@@ -153,15 +153,19 @@ async function collect(args) {
     ...branded.map((q) => ({ q, cohort: "branded" })),
     ...unbranded.map((q) => ({ q, cohort: "unbranded" })),
   ];
+  // model_name is REQUIRED by the API (verified live 2026-08-20: omitting it returns
+  // 40501 Invalid Field). Defaults are the consumer-representative models; override
+  // via AEA_MODEL_CHATGPT / AEA_MODEL_PERPLEXITY / AEA_MODEL_GEMINI. Valid names:
+  // GET /v3/ai_optimization/<provider>/llm_responses/models
   const models = [
-    { name: "chatgpt", path: "/v3/ai_optimization/chat_gpt/llm_responses/live" },
-    { name: "perplexity", path: "/v3/ai_optimization/perplexity/llm_responses/live" },
-    { name: "gemini", path: "/v3/ai_optimization/gemini/llm_responses/live" },
+    { name: "chatgpt", path: "/v3/ai_optimization/chat_gpt/llm_responses/live", model: process.env.AEA_MODEL_CHATGPT || "gpt-5.5" },
+    { name: "perplexity", path: "/v3/ai_optimization/perplexity/llm_responses/live", model: process.env.AEA_MODEL_PERPLEXITY || "sonar" },
+    { name: "gemini", path: "/v3/ai_optimization/gemini/llm_responses/live", model: process.env.AEA_MODEL_GEMINI || "gemini-3.5-flash" },
   ];
   out.llmProbes = [];
   for (const probe of probes.slice(0, 16)) {
     const perModel = await Promise.all(models.map(async (m) => {
-      const r = await dfs.optionalCall(m.path, { user_prompt: probe.q, web_search: true, max_output_tokens: 1024 }, { label: `probe:${m.name}:${probe.q.slice(0, 30)}` });
+      const r = await dfs.optionalCall(m.path, { user_prompt: probe.q, model_name: m.model, web_search: true, max_output_tokens: 1024 }, { label: `probe:${m.name}:${probe.q.slice(0, 30)}` });
       if (!r.ok) return { model: m.name, status: "unmeasured", error: r.error };
       const text = JSON.stringify(r.data || "");
       const mentioned = new RegExp(domain.split(".")[0], "i").test(text) || new RegExp(domain.replace(/\./g, "\\."), "i").test(text);
@@ -171,7 +175,10 @@ async function collect(args) {
   }
 
   // Brand mention metrics.
-  out.llmMentions = await dfs.optionalCall("/v3/ai_optimization/llm_mentions/target_metrics_lite/live", { targets: [domain], ...US }, { label: "llm_mentions" });
+  // Payload shape verified live 2026-08-20: `target` is an array of objects, each
+  // carrying exactly one of `domain` or `keyword` ({targets:[...]}, {target:["..."]}
+  // and {target:[{target,target_type}]} all return 40501). $0.10/request.
+  out.llmMentions = await dfs.optionalCall("/v3/ai_optimization/llm_mentions/target_metrics_lite/live", { target: [{ domain }], ...US }, { label: "llm_mentions" });
 
   out.spend = dfs.summary();
   const json = JSON.stringify(out, null, 2);
