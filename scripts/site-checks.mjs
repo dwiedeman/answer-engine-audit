@@ -20,7 +20,12 @@ function usage() {
 
 function isPrivateIp(ip) {
   if (ip.includes(":")) {
-    const low = ip.toLowerCase();
+    let low = ip.toLowerCase().replace(/^\[|\]$/g, "");
+    // IPv4-mapped IPv6 (::ffff:10.0.0.1) smuggles a v4 address past the v6 checks —
+    // judge the embedded v4 instead. Also catch the unabbreviated loopback/any forms.
+    const mapped = low.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/);
+    if (mapped) return isPrivateIp(mapped[1]);
+    if (/^(0+:){7}0*1$/.test(low) || /^(0+:){7}0+$/.test(low)) return true;
     return low === "::1" || low.startsWith("fe80:") || low.startsWith("fc") || low.startsWith("fd") || low === "::";
   }
   const p = ip.split(".").map(Number);
