@@ -21,10 +21,16 @@ function usage() {
 function isPrivateIp(ip) {
   if (ip.includes(":")) {
     let low = ip.toLowerCase().replace(/^\[|\]$/g, "");
-    // IPv4-mapped IPv6 (::ffff:10.0.0.1) smuggles a v4 address past the v6 checks —
-    // judge the embedded v4 instead. Also catch the unabbreviated loopback/any forms.
+    // IPv4-mapped IPv6 smuggles a v4 address past the v6 checks — judge the embedded
+    // v4 instead, in BOTH spellings: dotted (::ffff:10.0.0.1) and the hex form Node
+    // normalizes to (::ffff:a00:1). A dotted-only rule is dead against parsed input.
     const mapped = low.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/);
     if (mapped) return isPrivateIp(mapped[1]);
+    const mappedHex = low.match(/^::ffff:([0-9a-f]{1,4}):([0-9a-f]{1,4})$/);
+    if (mappedHex) {
+      const hi = parseInt(mappedHex[1], 16), lo = parseInt(mappedHex[2], 16);
+      return isPrivateIp(`${hi >> 8}.${hi & 255}.${lo >> 8}.${lo & 255}`);
+    }
     if (/^(0+:){7}0*1$/.test(low) || /^(0+:){7}0+$/.test(low)) return true;
     return low === "::1" || low.startsWith("fe80:") || low.startsWith("fc") || low.startsWith("fd") || low === "::";
   }
